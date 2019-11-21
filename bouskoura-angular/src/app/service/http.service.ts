@@ -5,7 +5,7 @@ import {catchError, map} from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders(),
-  withCredentials: true
+  withCredentials: false
 };
 
 @Injectable({
@@ -31,12 +31,12 @@ export class HttpService {
 
   httpPost(endpoint: any, body: any): Observable<any> {
     const url = this.baseUrl.concat(endpoint);
+
     return this.http.post(url, body, httpOptions)
       .pipe(
         map(res => {
           return res;
-        }),
-        catchError(this.handleError('res'))
+        })
       );
   }
 
